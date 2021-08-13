@@ -9,7 +9,7 @@ e_data <- custom_data_expl(model_fitted2, train, "Risk")
   y = custom_y_expl(model_fitted, train, "Risk"),
   label = "randomforest")
 
-.GlobalEnv$fobject <- fairness_check(rf_explainer,
+.GlobalEnv$fobject <- fairness_check(explainer,
                protected = GCR_train$Sex,
                privileged = "male",
                cutoff = 0.5)
