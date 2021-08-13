@@ -39,10 +39,10 @@ rf_workflow <-
   add_recipe(GCR_recipe) %>%
   add_model(rf_model)
 
-model_fitted <- rf_workflow %>%
+model_fitted2 <- rf_workflow %>%
   fit(data = GCR_train)
 
-model_fitted %>%
+model_fitted2 %>%
   predict(new_data = GCR_test)
 
 
