@@ -30,7 +30,31 @@ Voor dat het gebruik van de explainability en fairness scripts mogelijk is moete
 
     make_vars(<model>, <training_data>, <target_variable>, <label>, <PDP_variable>, <seed>)
 
+make_vars wordt gebruikt voor de explainability en maakt gebruik van de volgende parameters:
+
+- model
+    - fitted model
+- training_data
+    - data die ook gebruikt is voor het trainen
+- target_variable
+    - variabele die moet worden bepaald
+
+
+- label (optioneel)
+- PDP_variable (optioneel)
+    - variabele die wordt uigelegd in de partial dependency plot
+- seed (optioneel)
+    - custom seed. standaard staat op 123
+
+
     make_fairness_vars(<explainer>, <protected>, <privileged>, <cutoff>)
+    
+make_fairness_vars wordt gebruikt voor de fairness en maakt gebruik van de volgende parameters:
+
+- explainer
+- protected
+- privileged
+- cutoff (optioneel)
 
 Deze functies zorgen ervoor dat de data onder de juiste variabelen komen te staan zodat het script zonder errors kan draaien.
 
