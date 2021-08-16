@@ -78,10 +78,29 @@ In dit voorbeeld wordt gebruik gemaakt van de German Credit Risk dataset. Deze d
     make_fairness_vars(explainer, GCR_train$Sex, "male", 0.5)
     source('scripts/fairness/script.R')
 
+### Explainability plots
+Deze plots gelden uitsluitend als voorbeeld. 
+Er is niet gekeken naar eventuele positieve of negatieve behandelingen van subgroepen.
 
-<p align="center">
-<a href="pictures/SHAP.png"><src="pictures/SHAP.png"></a>
-</p>
+<img src="pictures/SHAP.png"
+     alt="Shapley plot"
+     style="center" />
+     
+<img src="pictures/breakdown.png"
+     alt="Breakdown plot"
+     style="center" />
+     
+<img src="pictures/ceteris.png"
+     alt="Ceteris-Paribus plot"
+     style="center" />
+     
+<img src="pictures/vip.png"
+     alt="feature importance"
+     style="center" />
 
-
+<img src="pictures/pdp.png"
+     alt="partial dependency plot"
+     style="center" />
+     
+### fairness plots
 
