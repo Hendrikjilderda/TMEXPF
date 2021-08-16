@@ -26,6 +26,9 @@ Het voornaamste doel van deze repo is het uitvoeren van de scripts. Toch is er o
 ### Fairness
 
 ## Gebruik
+
+#### Explainability
+
 Voor dat het gebruik van de explainability en fairness scripts mogelijk is moeten er eerst twee functies gecalled worden.
 
     make_vars(<model>, <training_data>, <target_variable>, <label>, <PDP_variable>, <seed>)
@@ -33,19 +36,21 @@ Voor dat het gebruik van de explainability en fairness scripts mogelijk is moete
 make_vars wordt gebruikt voor de explainability en maakt gebruik van de volgende parameters:
 
 - model
-    - fitted model
+    - fitted model.
 - training_data
-    - data die ook gebruikt is voor het trainen
+    - data die ook gebruikt is voor het trainen.
 - target_variable
-    - variabele die moet worden bepaald
+    - variabele die moet worden bepaald.
 
 
 - label (optioneel)
 - PDP_variable (optioneel)
-    - variabele die wordt uigelegd in de partial dependency plot
+    - variabele die wordt uigelegd in de partial dependency plot.
 - seed (optioneel)
-    - custom seed. standaard staat op 123
+    - custom seed. standaard staat op 123.
 
+
+#### Fairness
 
     make_fairness_vars(<explainer>, <protected>, <privileged>, <cutoff>)
     
@@ -57,4 +62,16 @@ make_fairness_vars wordt gebruikt voor de fairness en maakt gebruik van de volge
 - cutoff (optioneel)
 
 Deze functies zorgen ervoor dat de data onder de juiste variabelen komen te staan zodat het script zonder errors kan draaien.
+
+
+## Voorbeeld
+    source('scripts/explainability/functions.R')
+    make_vars(model_fitted2, GCR_train, "Risk", label = 'RandomForest', PDP_variable = 'Job', seed = 123)   
+    source('scripts/explainability/script.R') 
+
+    source('scripts/fairness/functions.R')
+    make_fairness_vars(explainer, GCR_train$Sex, "male", 0.5)
+    source('scripts/fairness/script.R')
+
+
 
