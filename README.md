@@ -11,6 +11,7 @@ Er wordt gebruik gemaakt van de volgende packages:
 - [fairmodels](https://modeloriented.github.io/fairmodels/)
 
 Simpel te installeren met behulp van dit command:
+
         install.packages(c("DALEX", "DALEXtra", "fairmodels"))
 
 ## Functies
