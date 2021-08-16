@@ -1,5 +1,8 @@
 # Model explainability en fairness
 
+## bugs
+- print niet de plots direct uit script. moeten nog los gecalled worden.
+
 ## Packages
 
 Er wordt gebruik gemaakt van de volgende packages:
@@ -65,6 +68,8 @@ Deze functies zorgen ervoor dat de data onder de juiste variabelen komen te staa
 
 
 ## Voorbeeld
+In dit voorbeeld wordt gebruik gemaakt van de German Credit Risk dataset. Deze dataset is te vinden op [kaggle](https://www.kaggle.com/uciml/german-credit).
+
     source('scripts/explainability/functions.R')
     make_vars(model_fitted2, GCR_train, "Risk", label = 'RandomForest', PDP_variable = 'Job', seed = 123)   
     source('scripts/explainability/script.R') 
@@ -72,6 +77,11 @@ Deze functies zorgen ervoor dat de data onder de juiste variabelen komen te staa
     source('scripts/fairness/functions.R')
     make_fairness_vars(explainer, GCR_train$Sex, "male", 0.5)
     source('scripts/fairness/script.R')
+
+
+<p align="center">
+<a href="pictures/SHAP.png"><src="pictures/SHAP.png"></a>
+</p>
 
 
 
