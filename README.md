@@ -23,10 +23,19 @@ Het voornaamste doel van deze repo is het uitvoeren van de scripts. Toch is er o
 ### explainability
 
 #### Instance level
+- SHAP(explainer, case)
+
+- CP(explainer, case)
+
+- BD(explainer, case)
 
 #### Dataset level
+- VIP(explainer)
+
+- PDP(explainer)
 
 ### Fairness
+FIXME
 
 ## Gebruik
 
@@ -103,4 +112,4 @@ Er is niet gekeken naar eventuele positieve of negatieve behandelingen van subgr
      style="center" />
      
 ### fairness plots
-
+FIXME
