@@ -7,14 +7,14 @@ source('scripts/load_dataset.R')
 source('scripts/randomforest.R')
 
 
-source('scripts/explainability/functions.R')
+source('ExpAI/explainability/functions.R')
 make_vars(model_fitted2, GCR_train, "Risk", label = 'RandomForest', PDP_variable = 'Job', seed = 2121)   
-source('scripts/explainability/script.R') 
+source('ExpAI/explainability/script.R') 
 
 
-source('scripts/fairness/functions.R')
+source('ExpAI/fairness/functions.R')
 make_fairness_vars(explainer, GCR_train$Sex, "male", 0.5)
-source('scripts/fairness/script.R')
+source('ExpAI/fairness/script.R')
 
 
 
