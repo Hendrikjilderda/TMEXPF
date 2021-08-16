@@ -42,9 +42,8 @@ rf_workflow <-
 model_fitted2 <- rf_workflow %>%
   fit(data = GCR_train)
 
-model_fitted2 %>%
-  predict(new_data = GCR_test)
-
+test <- model_fitted2 %>%
+  predict(new_data = GCR_train)
 
 
 
