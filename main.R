@@ -13,8 +13,8 @@ source('scripts/explainability/script.R')
 
 
 # source('scripts/fairness/functions.R')
-# make_fairness_vars(explainer, GCR_train$Sex, "male", 0.5)
-# source('scripts/fairness/script.R')
+make_fairness_vars(explainer, GCR_train$Sex, "male", 0.5)
+source('scripts/fairness/script.R')
 
 
 
