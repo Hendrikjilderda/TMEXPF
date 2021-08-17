@@ -27,10 +27,10 @@ GCR_recipe <- recipe(Risk ~ ., data = GCR_train) %>%
   step_mutate(Amount.month = Credit.amount / Duration) %>%
   step_string2factor(all_nominal(), -all_outcomes()) %>%
   step_impute_knn(Saving.accounts,  Checking.account) %>%
-  step_other(Purpose, threshold = 0.10, other = 'other_value')# is dit wel nodig? van 8 naar 4
+  step_other(Purpose, threshold = 0.10, other = 'other_value')
 
 rf_model <-
-  rand_forest(mtry = 8, trees = 500, min_n = 5) %>%
+  rand_forest(mtry = 8, trees = 500, min_n = 2) %>%
   set_engine("randomForest") %>%
   set_mode("classification")
 
