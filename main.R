@@ -8,7 +8,7 @@ source('scripts/randomforest.R')
 
 
 source('EXPF/explainability/functions.R')
-make_vars(model_fitted2, GCR_train, "Risk", label = 'RandomForest', PDP_variable = 'Job', seed = 2121)   
+make_vars(model_fitted2, GCR_train, "Risk", label = 'RandomForest', PDP_variable = 'Job', seed = 21)   
 source('EXPF/explainability/script.R') 
 
 
@@ -27,3 +27,8 @@ plot(plot_CP)
 plot(plot_VIP)
 
 plot(plot_PDP)
+
+plot(fobject)
+
+plot(metric_scores(fobject))
+

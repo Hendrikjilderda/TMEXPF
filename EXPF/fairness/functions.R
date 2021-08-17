@@ -13,5 +13,3 @@ gen_fobject <- function(explainer, protected, privileged, cutoff = 0.5){
                                   cutoff = cutoff)
 }
 
-plot(fobject)
-plot_density(fobject)
