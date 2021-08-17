@@ -32,3 +32,4 @@ plot(fobject)
 
 plot(metric_scores(fobject))
 
+plot(fairness_radar(fobject))
