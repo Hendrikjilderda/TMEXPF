@@ -1,0 +1,113 @@
+---
+title: "python_test"
+output: document
+---
+# basic mathematical tests including input, formatted strings and custom functions
+
+``` {python}
+
+def add(x, y):
+  return x + y
+
+def multiply(x, y):
+  return x * y
+
+def subtract(x, y):
+  return x - y
+
+def divide(x, y):
+  return x/y
+
+def combined(x, y, z):
+  x  = x + y
+  y = y - x
+  return(((x - y) * z) / x)
+
+
+x = input('x:')
+y = input('y:')
+print(f"{x} + {y} = {add(x, y)}")
+print(f"{x} * {y} = {multiply(int(x), int(y))}")
+print(f"{x} - {y} = {subtract(int(x), int(y))}")
+print(f"{x} / {y} = {divide(int(x), int(y))}")
+
+
+```
+
+# gebruik van python functies in R
+```{r}
+plus <- add(4,3)
+keer <- multiply(4, 3)
+gedeelddoor <- divide(10, 4)
+min <- subtract(10, 4)
+
+```
+
+
+# gebruik van de numpy python library in R
+In de code block hieronder staat een voorbeeld van de numpy python library die
+een random waarde uit de array pakt. hierin wordt numpy volgens R syntax benaderd
+
+```{r}
+array <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+np <- import('numpy')
+
+random <- np$random$randint(1, 19)
+array
+random
+array[random]
+
+```
+# maken van een aranged array in python en bewerken in R
+#fixme werkt nog niet goed!!!
+
+# https://jakevdp.github.io/PythonDataScienceHandbook/02.03-computation-on-arrays-ufuncs.html
+
+
+```{python}
+import numpy as np
+
+global aranged
+
+aranged = np.arange(10) # 0 tot 9
+print(aranged)
+
+```
+#FIXME deze werkt nog niet
+```{r}
+aranged[1][5] <- 100
+
+```
+
+
+#testen van pandas
+importeren van data via python en aanpassing in R
+```{python}
+import pandas as pd
+
+data = pd.read_csv("./data/test.csv")
+
+```
+
+```{r}
+matplotlib <- import("matplotlib")
+data$describe()
+
+matplotlib$boxplot(data)
+
+
+
+```
+#testing matplotlib
+FIXME twijfel of dit werkt
+
+```{python}
+import matplotlib.pyplot as plt
+
+plt.boxplot(data)
+plt.plot(data.Sex, data.Class)
+
+```
+
+
+
