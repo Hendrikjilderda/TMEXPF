@@ -94,7 +94,7 @@ ui <- dashboardPage(skin = "blue",
             ,width = 12),
             box(sliderInput("v_duration", label = "Duration",
                             min = 6, max = 72, value = 18)
-            ,width = 4)    
+            ,width = 12)    
         )
     )
 )
