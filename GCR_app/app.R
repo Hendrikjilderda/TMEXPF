@@ -1,5 +1,5 @@
 # known bugs:
-# * vakje van voorspelling scaled niet mee
+# /
 
 library(shiny)
 library(shinydashboard)
@@ -32,20 +32,27 @@ model  <- readRDS("GCR_xgmodel.rds")
 
 
 # Define UI for application that draws a histogram
-ui <- dashboardPage(
-    dashboardHeader(title = "CJIB"),
-    dashboardSidebar(
+ui <- dashboardPage(skin = "blue",
+    dashboardHeader(title = "CJIB", titleWidth = '150px'),
+    dashboardSidebar( width = 150,
         menuItem(
             "German Credit Risk",
             tabName = "GCR tab"
         )
     ),
     dashboardBody(
+        tags$head(tags$style(HTML('
+      .main-header .logo {
+        font-family: "Georgia", Times, "Times New Roman", serif;
+        font-weight: bold;
+        font-size: 40px;
+      }
+    '))),
+
         tabItem(
             tabName = "GCR tab",
-            tags$head(tags$style(HTML(".small-box {width: 100px}"))),
-            
-            box(valueBoxOutput("GCR_prediction")),
+
+            box(valueBoxOutput("GCR_prediction", width = 12), width = 12),
             
             box(selectInput("v_purpose", label = "Purpose",
                             choices = c("domestic appliances", 
@@ -63,7 +70,9 @@ ui <- dashboardPage(
             ),
             
             box(selectInput("v_job", label = "Job",
-                            choices = c("unskilled and non-resident", "unskilled and resident", "skilled", "highly skilled"))
+                            choices = c("unskilled and non-resident", 
+                                        "unskilled and resident", "skilled", 
+                                        "highly skilled"))
             ),
             box(selectInput("v_savings", label = "Savings",
                             choices = c("little", "moderate","rich"))
@@ -127,9 +136,9 @@ server <- function(input, output) {
         valueBox(
             value = paste0(round(100*prob_prediction, 0), "%"),
             subtitle = paste0("Risk: ", if_else(prediction$.pred_class == 1, 'low', 'high')),
-            color = prediction_colour
+            color = prediction_colour,
+            icon = icon("euro", lib = "glyphicon")
         )
-
     })
 
 }
