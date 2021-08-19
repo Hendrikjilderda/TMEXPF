@@ -131,9 +131,52 @@ boosted_res %>% unnest(.predictions) %>%
 
 
 
+
+
 ```{r}
 # Fit the entire data set using the final wf 
 final_boosted_model <- fit(boosted_wf, GCR)
 saveRDS(final_boosted_model, "GCR_xgmodel.rds")
+```
+
+```{r}
+custom_model_expl <- function(recipe_workflow) {return(recipe_workflow$fit$fit)}
+
+custom_data_expl <- function(recipe_workflow, dataset, target_variable) { 
+  data_return <- as.data.frame(prep(recipe_workflow$pre$actions$recipe$recipe, dataset) %>% 
+                                 bake(dataset) %>% 
+                                 select(-target_variable))
+  
+  return(data_return)
+}
+
+custom_y_expl <- function(recipe_workflow, dataset, target_variable) { 
+  data_return <- prep(recipe_workflow$pre$actions$recipe$recipe, dataset) %>% 
+    bake(dataset) %>% 
+    mutate(target_variable = ifelse(target_variable == 'good', 1, 0))  %>% 
+    pull(target_variable)
+  
+  return(data_return)
+}
+
+```
+
+
+
+
+```{r}
+# explainer
+explainer <- DALEX::explain(
+  model = custom_model_expl(final_boosted_model),
+  data = custom_data_expl(final_boosted_model, GCR_train,  "Risk"),
+  y = custom_y_expl(final_boosted_model, GCR_train,  "Risk"),
+  label = "XGboost")
+```
+
+```{r}
+
+saveRDS(explainer, "GCR_xg_explainer.rds")
+
+saveRDS(xg_rec, "GCR_xg_rec.rds")
 ```
 
