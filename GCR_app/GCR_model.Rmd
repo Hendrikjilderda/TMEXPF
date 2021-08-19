@@ -32,6 +32,10 @@ GCR <- GCR %>% select(-X)
 GCR$Job <- if_else(GCR$Job == 0, "unskilled and non-resident",
                    if_else(GCR$Job == 1, "unskilled and resident",
                            if_else(GCR$Job == 2, "skilled", "highly skilled")))
+GCR$Risk <- if_else(GCR$Risk == 'good', 1, 0)
+
+GCR$Risk <- as.factor(GCR$Risk)
+
 set.seed(123)
 GCR_split <- initial_split(GCR, strata = Risk)
 GCR_train <- training(GCR_split)
@@ -46,8 +50,7 @@ xg_rec <- recipe(Risk~., data = GCR_train) %>%
   step_impute_knn(Saving.accounts,  Checking.account) %>%  
   step_dummy(all_nominal(), -all_outcomes()) %>% 
   step_impute_median(all_predictors()) %>% 
-  step_normalize(all_predictors()) %>%
-  step_string2factor(all_outcomes())
+  step_normalize(all_predictors())
 ```
 
 ```{r}
@@ -133,34 +136,4 @@ boosted_res %>% unnest(.predictions) %>%
 final_boosted_model <- fit(boosted_wf, GCR)
 saveRDS(final_boosted_model, "GCR_xgmodel.rds")
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

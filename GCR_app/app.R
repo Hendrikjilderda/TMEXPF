@@ -1,11 +1,5 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+# known bugs:
+# * vakje van voorspelling scaled niet mee
 
 library(shiny)
 library(shinydashboard)
@@ -13,6 +7,28 @@ library(tidymodels)
 library(tidyverse)
 
 model  <- readRDS("GCR_xgmodel.rds")
+
+# testcase
+
+# predict(
+#     model,
+#     tibble("Age" = 23,
+#            "Sex" = 'male',
+#            "Job" = 'skilled',
+#            "Housing" = 'own',
+#            "Saving.accounts" = 'rich',
+#            "Checking.account" = 'rich',
+#            "Credit.amount" = 2000,
+#            "Duration" = 18,
+#            "Purpose" = 'education',
+#            "X" = 0),
+#     type = "prob"
+# ) %>%
+#     gather() %>%            
+#     arrange(desc(value)) %>% 
+#     slice_head() %>%
+#     select(value)
+
 
 
 # Define UI for application that draws a histogram
@@ -27,11 +43,15 @@ ui <- dashboardPage(
     dashboardBody(
         tabItem(
             tabName = "GCR tab",
+            tags$head(tags$style(HTML(".small-box {width: 100px}"))),
             
             box(valueBoxOutput("GCR_prediction")),
             
             box(selectInput("v_purpose", label = "Purpose",
-                            choices = c("domestic apliances", "furniture", "education", "radio/tv", "repairs", "others"))
+                            choices = c("domestic appliances", 
+                                        "furniture/equipment", "education", 
+                                        "radio/TV", "repairs", "car", 
+                                        "business", "vacation/others"))
             ),
             
             box(selectInput("v_sex", label = "Sex",
@@ -46,10 +66,10 @@ ui <- dashboardPage(
                             choices = c("unskilled and non-resident", "unskilled and resident", "skilled", "highly skilled"))
             ),
             box(selectInput("v_savings", label = "Savings",
-                            choices = c("little", "moderate", "quite rich", "rich"))
+                            choices = c("little", "moderate","rich"))
             ),
             box(selectInput("v_checkings", label = "Checkings",
-                            choices = c("little", "moderate", "quite rich", "rich"))
+                            choices = c("little", "moderate", "rich"))
             ),
             
             box(sliderInput("v_age", label = "Age",
@@ -96,13 +116,17 @@ server <- function(input, output) {
                    "X" = 0),
             type = "prob"
         ) %>%
-            gather()
+            gather() %>%            
+            arrange(desc(value)) %>% 
+            slice_head() %>%
+            select(value)
             
-        prediction_colour <- if_else(prediction$.pred_class == "good", "green", "red")
+            
+        prediction_colour <- if_else(prediction$.pred_class == 1, "green", "red")
         
         valueBox(
             value = paste0(round(100*prob_prediction, 0), "%"),
-            subtitle = paste0("Risk", prediction$.pred_class),
+            subtitle = paste0("Risk: ", if_else(prediction$.pred_class == 1, 'low', 'high')),
             color = prediction_colour
         )
 
