@@ -59,37 +59,37 @@ ui <- dashboardPage(skin = "blue",
                                         "furniture/equipment", "education", 
                                         "radio/TV", "repairs", "car", 
                                         "business", "vacation/others"))
-            ),
+            ,width = 4),
             
             box(selectInput("v_sex", label = "Sex",
                             choices = c("male", "female"))
-            ),
+            ,width = 4),
             
             box(selectInput("v_housing", label = "Housing",
                             choices = c("own", "rent", "free"))
-            ),
+            ,width = 4),
             
             box(selectInput("v_job", label = "Job",
                             choices = c("unskilled and non-resident", 
                                         "unskilled and resident", "skilled", 
                                         "highly skilled"))
-            ),
+            ,width = 4),
             box(selectInput("v_savings", label = "Savings",
                             choices = c("little", "moderate","rich"))
-            ),
+            ,width = 4),
             box(selectInput("v_checkings", label = "Checkings",
                             choices = c("little", "moderate", "rich"))
-            ),
+            ,width = 4),
             
             box(sliderInput("v_age", label = "Age",
                             min = 19, max = 75, value = 35)
-            ),
+            ,width = 4),
             box(sliderInput("v_creditamount", label = "Credit amount",
                             min = 276, max = 18242, value = 2300)
-            ),
+            ,width = 4),
             box(sliderInput("v_duration", label = "Duration",
                             min = 6, max = 72, value = 18)
-            )    
+            ,width = 4)    
         )
     )
 )
